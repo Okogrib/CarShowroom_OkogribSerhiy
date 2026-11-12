@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Text;
+
+using System;
 using System.Text;
 
 namespace CarShowroom_Okogrib
@@ -32,7 +34,7 @@ namespace CarShowroom_Okogrib
                         Pause();
                         break;
                     case "3":
-                        Console.WriteLine("Поки не зроблено.");
+                        ShowWorkloadTable();
                         Pause();
                         break;
                     case "0":
@@ -82,9 +84,31 @@ namespace CarShowroom_Okogrib
             }
         }
 
+        static void ShowWorkloadTable()
+        {
+            Console.WriteLine("Зведена таблиця наявності авто за класами та кварталами:");
+            Console.Write($"{"Клас/Квартал",12}");
+            for (int col = 1; col <= 4; col++)
+            {
+                Console.Write($"{col + " кв.",8}");
+            }
+            Console.WriteLine();
+
+            for (int row = 1; row <= 3; row++)
+            {
+                Console.Write($"{'М' + row.ToString(),12}");
+                for (int col = 1; col <= 4; col++)
+                {
+                    int carsCount = row * col * 2;
+                    Console.Write($"{carsCount,8}");
+                }
+                Console.WriteLine();
+            }
+        }
+
         static void Pause()
         {
-            Console.WriteLine("\nНатисніть будь-яку клавішу...");
+            Console.WriteLine("\nНатисніть будь-яку клавішу.");
             Console.ReadKey(true);
             Console.Clear();
         }
