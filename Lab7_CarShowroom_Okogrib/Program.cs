@@ -28,7 +28,7 @@ namespace CarShowroom_Okogrib
                         Pause();
                         break;
                     case "2":
-                        Console.WriteLine("Поки не зроблено.");
+                        ShowCostTable();
                         Pause();
                         break;
                     case "3":
@@ -49,7 +49,7 @@ namespace CarShowroom_Okogrib
 
         static void ShowAbout()
         {
-            Console.WriteLine("Тема: Автосалон");
+            Console.WriteLine("Тема: 16. Автосалон");
             Console.WriteLine("Сутності: Користувач, Автомобіль, Модель (довідник)");
             Console.WriteLine("Поля сутності «Автомобіль» (7 полів):");
             Console.WriteLine("1. VIN — string (ідентифікатор)");
@@ -63,9 +63,28 @@ namespace CarShowroom_Okogrib
             Console.WriteLine("Підсумкова величина: середня ціна за марками та скільки авто продано за місяць.");
         }
 
+        static void ShowCostTable()
+        {
+            Console.WriteLine("Таблиця орієнтовної ціни авто залежно від пробігу (у тис. км):");
+            Console.WriteLine($"{"Пробіг, тис.км",15}{"Ціна, тис.$",15}");
+            Console.WriteLine(new string('-', 32));
+
+            double basePrice = 30.0;
+            double from = 0.0;
+            double to = 150.0;
+            double step = 20.0;
+
+            for (double km = from; km <= to + 1e-9; km += step)
+            {
+               
+                double currentPrice = basePrice * Math.Exp(-0.005 * km);
+                Console.WriteLine($"{km,15:F1}{currentPrice,15:F2}");
+            }
+        }
+
         static void Pause()
         {
-            Console.WriteLine("\nНатисніть будь-яку клавішу");
+            Console.WriteLine("\nНатисніть будь-яку клавішу...");
             Console.ReadKey(true);
             Console.Clear();
         }
