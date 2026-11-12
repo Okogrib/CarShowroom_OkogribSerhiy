@@ -16,7 +16,7 @@ namespace CarShowroom_Okogrib
                 Console.WriteLine("1. Про програму");
                 Console.WriteLine("2. Таблиця вартості авто залежно від пробігу");
                 Console.WriteLine("3. Зведена таблиця наявності та продажу машин");
-                Console.WriteLine("0. Вихід ");
+                Console.WriteLine("0. Вихід");
                 Console.Write("Ваш вибір: ");
                 string choice = Console.ReadLine();
                 Console.WriteLine();
@@ -24,7 +24,7 @@ namespace CarShowroom_Okogrib
                 switch (choice)
                 {
                     case "1":
-                        Console.WriteLine("Поки не зроблено.");
+                        ShowAbout();
                         Pause();
                         break;
                     case "2":
@@ -47,9 +47,25 @@ namespace CarShowroom_Okogrib
             }
         }
 
+        static void ShowAbout()
+        {
+            Console.WriteLine("Тема: Автосалон");
+            Console.WriteLine("Сутності: Користувач, Автомобіль, Модель (довідник)");
+            Console.WriteLine("Поля сутності «Автомобіль» (7 полів):");
+            Console.WriteLine("1. VIN — string (ідентифікатор)");
+            Console.WriteLine("2. марка — string");
+            Console.WriteLine("3. код моделі — int (із довідника)");
+            Console.WriteLine("4. рік випуску — int");
+            Console.WriteLine("5. пробіг — int");
+            Console.WriteLine("6. колір — string");
+            Console.WriteLine("7. ціна — double");
+            Console.WriteLine("8. чи проданий — bool");
+            Console.WriteLine("Підсумкова величина: середня ціна за марками та скільки авто продано за місяць.");
+        }
+
         static void Pause()
         {
-            Console.WriteLine("\nНатисніть будь-яку клавішу.");
+            Console.WriteLine("\nНатисніть будь-яку клавішу");
             Console.ReadKey(true);
             Console.Clear();
         }
