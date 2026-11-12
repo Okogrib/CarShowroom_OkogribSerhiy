@@ -86,32 +86,40 @@ namespace CarShowroom_Okogrib
 
         static void ShowWorkloadTable()
         {
-            Console.WriteLine("Зведена таблиця продажу авто з підсумками:");
-            Console.Write($"{"Категорія",12}");
-            for (int col = 1; col <= 4; col++)
+            Console.Write("Введіть кількість рядків (моделей) від 1 до 5: ");
+            if (!int.TryParse(Console.ReadLine(), out int rows) || rows <= 0 || rows > 5)
             {
-                Console.Write($"{'Q' + col.ToString(),8}");
+                Console.WriteLine("Помилка: невірне число рядків!");
+                return;
+            }
+
+            Console.Write("Введіть кількість стовпців (періодів) від 1 до 5: ");
+            if (!int.TryParse(Console.ReadLine(), out int cols) || cols <= 0 || cols > 5)
+            {
+                Console.WriteLine("Помилка: невірне число стовпців!");
+                return;
+            }
+
+            Console.WriteLine("\nДинамічна зведена таблиця продажу:");
+            Console.Write($"{"Модель",10}");
+            for (int c = 1; c <= cols; c++)
+            {
+                Console.Write($"{'P' + c.ToString(),8}");
             }
             Console.WriteLine($"{"Разом",8}");
-            Console.WriteLine(new string('-', 44));
 
-            int totalSum = 0;
-
-            for (int row = 1; row <= 3; row++)
+            for (int r = 1; r <= rows; r++)
             {
-                Console.Write($"{'М' + row.ToString(),12}");
-                int rowSum = 0;
-                for (int col = 1; col <= 4; col++)
+                Console.Write($"{'М' + r.ToString(),10}");
+                int rowTotal = 0;
+                for (int c = 1; c <= cols; c++)
                 {
-                    int val = row * col;
-                    rowSum += val;
+                    int val = r * c * 3;
+                    rowTotal += val;
                     Console.Write($"{val,8}");
                 }
-                totalSum += rowSum;
-                Console.WriteLine($"{rowSum,8}");
+                Console.WriteLine($"{rowTotal,8}");
             }
-            Console.WriteLine(new string('-', 44));
-            Console.WriteLine($"Загалом продано автомобілів: {totalSum}");
         }
 
         static void Pause()
