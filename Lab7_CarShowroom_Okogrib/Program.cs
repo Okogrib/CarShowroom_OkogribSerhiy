@@ -86,24 +86,32 @@ namespace CarShowroom_Okogrib
 
         static void ShowWorkloadTable()
         {
-            Console.WriteLine("Зведена таблиця наявності авто за класами та кварталами:");
-            Console.Write($"{"Клас/Квартал",12}");
+            Console.WriteLine("Зведена таблиця продажу авто з підсумками:");
+            Console.Write($"{"Категорія",12}");
             for (int col = 1; col <= 4; col++)
             {
-                Console.Write($"{col + " кв.",8}");
+                Console.Write($"{'Q' + col.ToString(),8}");
             }
-            Console.WriteLine();
+            Console.WriteLine($"{"Разом",8}");
+            Console.WriteLine(new string('-', 44));
+
+            int totalSum = 0;
 
             for (int row = 1; row <= 3; row++)
             {
                 Console.Write($"{'М' + row.ToString(),12}");
+                int rowSum = 0;
                 for (int col = 1; col <= 4; col++)
                 {
-                    int carsCount = row * col * 2;
-                    Console.Write($"{carsCount,8}");
+                    int val = row * col;
+                    rowSum += val;
+                    Console.Write($"{val,8}");
                 }
-                Console.WriteLine();
+                totalSum += rowSum;
+                Console.WriteLine($"{rowSum,8}");
             }
+            Console.WriteLine(new string('-', 44));
+            Console.WriteLine($"Загалом продано автомобілів: {totalSum}");
         }
 
         static void Pause()
