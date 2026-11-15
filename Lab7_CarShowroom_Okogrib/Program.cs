@@ -12,13 +12,7 @@ namespace CarShowroom_Okogrib
 
             while (running)
             {
-                Console.WriteLine("АВТОСАЛОН");
-                Console.WriteLine("1. Про програму");
-                Console.WriteLine("2. Таблиця вартості авто залежно від пробігу");
-                Console.WriteLine("3. Зведена таблиця продажу машин за місяцями");
-                Console.WriteLine("0. Вихід");
-                Console.Write("Оберіть пункт меню: ");
-
+                ShowMenu();
                 string choice = Console.ReadLine();
                 Console.WriteLine();
 
@@ -46,6 +40,16 @@ namespace CarShowroom_Okogrib
                         break;
                 }
             }
+        }
+
+        static void ShowMenu()
+        {
+            Console.WriteLine("АВТОСАЛОН");
+            Console.WriteLine("1. Про програму");
+            Console.WriteLine("2. Таблиця вартості авто залежно від пробігу");
+            Console.WriteLine("3. Зведена таблиця продажу машин за місяцями");
+            Console.WriteLine("0. Вихід");
+            Console.Write("Оберіть пункт меню: ");
         }
 
         static void ShowAbout()
@@ -114,18 +118,19 @@ namespace CarShowroom_Okogrib
                 int rowSum = 0;
                 for (int c = 1; c <= cols; c++)
                 {
-                    int soldCount = r * c; 
+                    int soldCount = r * c;
                     rowSum += soldCount;
                     Console.Write($"{soldCount,10}");
                 }
 
                 totalSum += rowSum;
-                Console.WriteLine($"{rowSum,10}"); 
+                Console.WriteLine($"{rowSum,10}");
             }
 
             Console.WriteLine(new string('-', 10 + (cols + 1) * 10));
             Console.WriteLine($"Загалом продано машин: {totalSum}");
         }
+
         static void Pause()
         {
             Console.WriteLine("\nНатисніть будь-яку клавішу для повернення в меню.");
