@@ -69,6 +69,36 @@ namespace CarShowroom_Okogrib
             Console.WriteLine("Підсумкова величина: середня ціна за марками та кількість проданих авто за місяць.");
         }
 
+        static int ReadInt(string prompt, int min, int max)
+        {
+            int value;
+            while (true)
+            {
+                Console.Write(prompt);
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out value) && value >= min && value <= max)
+                {
+                    return value;
+                }
+                Console.WriteLine($"Помилка! Введіть ціле число від {min} до {max}.");
+            }
+        }
+
+        static double ReadDouble(string prompt, double min, double max)
+        {
+            double value;
+            while (true)
+            {
+                Console.Write(prompt);
+                string input = Console.ReadLine();
+                if (double.TryParse(input, out value) && value >= min && value <= max)
+                {
+                    return value;
+                }
+                Console.WriteLine($"Помилка! Введіть число від {min} до {max}.");
+            }
+        }
+
         static double CalculatePrice(double initialPrice, double km)
         {
             return initialPrice * Math.Exp(-0.0048 * km);
@@ -94,18 +124,8 @@ namespace CarShowroom_Okogrib
 
         static void ShowWorkloadTable()
         {
-            Console.Write("Введіть кількість рядків (від 1 до 5): ");
-            if (!int.TryParse(Console.ReadLine(), out int rows) || rows <= 0 || rows > 5)
-            {
-                Console.WriteLine("Помилка: невірне число рядків (дозволено від 1 до 5).");
-                return;
-            }
-            Console.Write("Введіть кількість стовпців (від 1 до 5): ");
-            if (!int.TryParse(Console.ReadLine(), out int cols) || cols <= 0 || cols > 5)
-            {
-                Console.WriteLine("Помилка: невірне число стовпців (дозволено від 1 до 5).");
-                return;
-            }
+            int rows = ReadInt("Введіть кількість рядків (від 1 до 5): ", 1, 5);
+            int cols = ReadInt("Введіть кількість стовпців (від 1 до 5): ", 1, 5);
 
             Console.WriteLine("\nЗВЕДЕНА ТАБЛИЦЯ ПРОДАЖУ ТА ПІДСУМКИ");
             Console.Write($"{"Модель",10}");
