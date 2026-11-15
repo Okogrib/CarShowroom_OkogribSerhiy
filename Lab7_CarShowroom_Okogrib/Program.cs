@@ -69,6 +69,11 @@ namespace CarShowroom_Okogrib
             Console.WriteLine("Підсумкова величина: середня ціна за марками та кількість проданих авто за місяць.");
         }
 
+        static double CalculatePrice(double initialPrice, double km)
+        {
+            return initialPrice * Math.Exp(-0.0048 * km);
+        }
+
         static void ShowCostTable()
         {
             Console.WriteLine("ТАБУЛЮВАННЯ ЦІНИ АВТОМОБІЛЯ");
@@ -82,7 +87,7 @@ namespace CarShowroom_Okogrib
 
             for (double km = from; km <= to + 1e-9; km += step)
             {
-                double price = initialPrice * Math.Exp(-0.0048 * km);
+                double price = CalculatePrice(initialPrice, km);
                 Console.WriteLine($"{km,15:F1} | {price,12:F2}");
             }
         }
