@@ -104,15 +104,12 @@ namespace CarShowroom_Okogrib
             return initialPrice * Math.Exp(-0.0048 * km);
         }
 
-        static void ShowCostTable()
+        static void CalculateAndPrintCostTable(double from, double to, double step)
         {
             Console.WriteLine("ТАБУЛЮВАННЯ ЦІНИ АВТОМОБІЛЯ");
             Console.WriteLine($"{"Пробіг, тис.км",15} | {"Ціна, тис.$",12}");
             Console.WriteLine(new string('-', 30));
 
-            double from = 0.0;
-            double to = 100.0;
-            double step = 20.0;
             double initialPrice = 35.0;
 
             for (double km = from; km <= to + 1e-9; km += step)
@@ -120,6 +117,16 @@ namespace CarShowroom_Okogrib
                 double price = CalculatePrice(initialPrice, km);
                 Console.WriteLine($"{km,15:F1} | {price,12:F2}");
             }
+        }
+
+        static void ShowCostTable()
+        {
+            double from = ReadDouble("Введіть початковий пробіг (від 0 до 50): ", 0, 50);
+            double to = ReadDouble("Введіть кінцевий пробіг (від 50 до 150): ", 50, 150);
+            double step = ReadDouble("Введіть крок табулювання (від 5 до 50): ", 5, 50);
+            Console.WriteLine();
+
+            CalculateAndPrintCostTable(from, to, step);
         }
 
         static void ShowWorkloadTable()
