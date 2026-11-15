@@ -18,26 +18,11 @@ namespace CarShowroom_Okogrib
 
                 switch (choice)
                 {
-                    case "1":
-                        ShowAbout();
-                        Pause();
-                        break;
-                    case "2":
-                        ShowCostTable();
-                        Pause();
-                        break;
-                    case "3":
-                        ShowWorkloadTable();
-                        Pause();
-                        break;
-                    case "0":
-                        running = false;
-                        Console.WriteLine("Роботу програми завершено. До побачення!");
-                        break;
-                    default:
-                        Console.WriteLine("Помилка: такого пункту меню не існує. Спробуйте ще раз.");
-                        Pause();
-                        break;
+                    case "1": ShowAbout(); Pause(); break;
+                    case "2": ShowCostTable(); Pause(); break;
+                    case "3": ShowWorkloadTable(); Pause(); break;
+                    case "0": running = false; Console.WriteLine("Роботу програми завершено. До побачення!"); break;
+                    default: Console.WriteLine("Помилка: такого пункту меню не існує. Спробуйте ще раз."); Pause(); break;
                 }
             }
         }
@@ -47,7 +32,7 @@ namespace CarShowroom_Okogrib
             Console.WriteLine("АВТОСАЛОН");
             Console.WriteLine("1. Про програму");
             Console.WriteLine("2. Таблиця вартості авто залежно від пробігу");
-            Console.WriteLine("3. Зведена таблиця продажу машин за місяцями");
+            Console.WriteLine("3. Зведена таблиця наявності та продажу машин");
             Console.WriteLine("0. Вихід");
             Console.Write("Оберіть пункт меню: ");
         }
