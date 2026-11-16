@@ -64,6 +64,10 @@ namespace CarShowroom_Okogrib
                         }
                         Pause();
                         break;
+                    case "8":
+                        RunTypesExperiment();
+                        Pause();
+                        break;
                     case "0": running = false; Console.WriteLine("Роботу програми завершено. До побачення!"); break;
                     default: Console.WriteLine("Помилка: такого пункту меню не існує. Спробуйте ще раз."); Pause(); break;
                 }
@@ -80,8 +84,37 @@ namespace CarShowroom_Okogrib
             Console.WriteLine("5. Показати список цін автомобілів");
             Console.WriteLine("6. Видалити ціну за номером");
             Console.WriteLine("7. Показати статистику та найдорожче авто");
+            Console.WriteLine("8. Дослід: передавання за значенням та посиланням");
             Console.WriteLine("0. Вихід");
             Console.Write("Оберіть пункт меню: ");
+        }
+        static void TryChangeValueType(int mileage)
+        {
+            mileage += 50000;
+            Console.WriteLine($"  [Усередині методу TryChangeValueType] пробіг = {mileage}");
+        }
+
+        static void ChangeReferenceElement(double[] prices)
+        {
+            prices[0] += 10.0;
+            Console.WriteLine($"  [Усередині методу ChangeReferenceElement] ціна[0] = {prices[0]:F2}");
+        }
+
+        static void RunTypesExperiment()
+        {
+            Console.WriteLine("=== ДОСЛІД: ЗНАЧИМИЙ ПРОТИ ПОСИЛАЛЬНОГО ТИПУ ===");
+
+            int testMileage = 10000;
+            Console.WriteLine($"1. Значимий тип (int):");
+            Console.WriteLine($"  До виклику методу: testMileage = {testMileage}");
+            TryChangeValueType(testMileage);
+            Console.WriteLine($"  Після виклику методу: testMileage = {testMileage} (не змінився, бо передавалася копія)\n");
+
+            double[] testPrices = { 25.0, 30.0 };
+            Console.WriteLine($"2. Посилальний тип (масив double[]):");
+            Console.WriteLine($"  До виклику методу: testPrices[0] = {testPrices[0]:F2}");
+            ChangeReferenceElement(testPrices);
+            Console.WriteLine($"  Після виклику методу: testPrices[0] = {testPrices[0]:F2} (змінився, бо копіювалася адреса масиву)");
         }
 
         static void AddPrice(double[] values, ref int count, double newValue, int capacity)
