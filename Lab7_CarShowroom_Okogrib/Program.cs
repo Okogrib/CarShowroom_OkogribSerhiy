@@ -27,7 +27,7 @@ namespace CarShowroom_Okogrib
                     case "4":
                         double newPrice = ReadDouble("Введіть ціну автомобіля (тис. $, від 1 до 500): ", 1, 500);
                         AddPrice(carPrices, ref count, newPrice, capacity);
-                        Console.WriteLine($"Поточна кількість записів у базі: {count}");
+                        Console.WriteLine($"Кількість записів у масиві після виклику: {count}");
                         Pause();
                         break;
                     case "5":
@@ -42,7 +42,7 @@ namespace CarShowroom_Okogrib
                         else
                         {
                             PrintPricesTable(carPrices, count);
-                            int numberToRemove = ReadInt($"Введіть номер запису для видалення (від 1 до {count}): ", 1, count);
+                            int numberToRemove = ReadInt("Введіть номер запису для видалення: ", -100, 1000);
                             RemoveAt(carPrices, ref count, numberToRemove - 1);
                         }
                         Pause();
@@ -91,32 +91,30 @@ namespace CarShowroom_Okogrib
         static void TryChangeValueType(int mileage)
         {
             mileage += 50000;
-            Console.WriteLine($"  [Усередині методу TryChangeValueType] пробіг = {mileage}");
+            Console.WriteLine($"  [Усередині TryChangeValueType] пробіг = {mileage}");
         }
-
         static void ChangeReferenceElement(double[] prices)
         {
             prices[0] += 10.0;
-            Console.WriteLine($"  [Усередині методу ChangeReferenceElement] ціна[0] = {prices[0]:F2}");
+            Console.WriteLine($"  [Усередині ChangeReferenceElement] ціна[0] = {prices[0]:F2}");
         }
 
         static void RunTypesExperiment()
         {
-            Console.WriteLine("=== ДОСЛІД: ЗНАЧИМИЙ ПРОТИ ПОСИЛАЛЬНОГО ТИПУ ===");
+            Console.WriteLine("ДОСЛІД: ЗНАЧИМИЙ ПРОТИ ПОСИЛАЛЬНОГО ТИПУ");
 
             int testMileage = 10000;
-            Console.WriteLine($"1. Значимий тип (int):");
+            Console.WriteLine("1. Значимий тип (int):");
             Console.WriteLine($"  До виклику методу: testMileage = {testMileage}");
             TryChangeValueType(testMileage);
-            Console.WriteLine($"  Після виклику методу: testMileage = {testMileage} (не змінився, бо передавалася копія)\n");
+            Console.WriteLine($"  Після виклику методу: testMileage = {testMileage}\n");
 
             double[] testPrices = { 25.0, 30.0 };
-            Console.WriteLine($"2. Посилальний тип (масив double[]):");
+            Console.WriteLine("2. Посилальний тип (масив double[]):");
             Console.WriteLine($"  До виклику методу: testPrices[0] = {testPrices[0]:F2}");
             ChangeReferenceElement(testPrices);
-            Console.WriteLine($"  Після виклику методу: testPrices[0] = {testPrices[0]:F2} (змінився, бо копіювалася адреса масиву)");
+            Console.WriteLine($"  Після виклику методу: testPrices[0] = {testPrices[0]:F2}");
         }
-
         static void AddPrice(double[] values, ref int count, double newValue, int capacity)
         {
             if (count == capacity)
@@ -146,7 +144,6 @@ namespace CarShowroom_Okogrib
             count--;
             Console.WriteLine($"Запис №{index + 1} успішно видалено.");
         }
-
         static void PrintPricesTable(double[] values, int count)
         {
             if (count == 0)
@@ -164,7 +161,6 @@ namespace CarShowroom_Okogrib
                 Console.WriteLine($"{i + 1,5} | {values[i],15:F2}");
             }
         }
-
         static void FindMaxPrice(double[] values, int count, out double maxValue, out int maxNumber)
         {
             if (count <= 0)
@@ -186,7 +182,6 @@ namespace CarShowroom_Okogrib
                 }
             }
         }
-
         static void CalculateStatistics(double[] values, int count, out double sum, out double average)
         {
             sum = 0;
