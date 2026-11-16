@@ -9,6 +9,9 @@ namespace CarShowroom_Okogrib
         {
             Console.OutputEncoding = Encoding.UTF8;
             bool running = true;
+            const int capacity = 100;
+            double[] carPrices = new double[capacity];
+            int count = 0;
 
             while (running)
             {
@@ -21,6 +24,12 @@ namespace CarShowroom_Okogrib
                     case "1": ShowAbout(); Pause(); break;
                     case "2": ShowCostTable(); Pause(); break;
                     case "3": ShowWorkloadTable(); Pause(); break;
+                    case "4":
+                        double newPrice = ReadDouble("Введіть ціну автомобіля (тис. $, від 1 до 500): ", 1, 500);
+                        AddPrice(carPrices, ref count, newPrice, capacity);
+                        Console.WriteLine($"Поточна кількість записів у базі: {count}");
+                        Pause();
+                        break;
                     case "0": running = false; Console.WriteLine("Роботу програми завершено. До побачення!"); break;
                     default: Console.WriteLine("Помилка: такого пункту меню не існує. Спробуйте ще раз."); Pause(); break;
                 }
@@ -33,8 +42,20 @@ namespace CarShowroom_Okogrib
             Console.WriteLine("1. Про програму");
             Console.WriteLine("2. Таблиця вартості авто залежно від пробігу");
             Console.WriteLine("3. Зведена таблиця наявності та продажу машин");
+            Console.WriteLine("4. Додати ціну автомобіля до бази");
             Console.WriteLine("0. Вихід");
             Console.Write("Оберіть пункт меню: ");
+        }
+        static void AddPrice(double[] values, ref int count, double newValue, int capacity)
+        {
+            if (count == capacity)
+            {
+                Console.WriteLine("Помилка: масив заповнений, місця більше немає.");
+                return;
+            }
+            values[count] = newValue;
+            count++;
+            Console.WriteLine("Ціну успішно додано.");
         }
 
         static void ShowAbout()
