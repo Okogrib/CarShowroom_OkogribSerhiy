@@ -34,6 +34,23 @@ namespace CarShowroom_Okogrib
                         PrintPricesTable(carPrices, count);
                         Pause();
                         break;
+                    case "6":
+                        if (count == 0)
+                        {
+                            Console.WriteLine("База порожня. Неможливо порахувати статистику.");
+                        }
+                        else
+                        {
+                            CalculateStatistics(carPrices, count, out double totalSum, out double averagePrice);
+                            FindMaxPrice(carPrices, count, out double maxPrice, out int maxNumber);
+                            Console.WriteLine("СТАТИСТИКА АВТОСАЛОНУ");
+                            Console.WriteLine($"Кількість авто: {count}");
+                            Console.WriteLine($"Загальна вартість: {totalSum:F2} тис. $");
+                            Console.WriteLine($"Середня ціна авто: {averagePrice:F2} тис. $");
+                            Console.WriteLine($"Найдорожчий автомобіль: №{maxNumber} ({maxPrice:F2} тис. $)");
+                        }
+                        Pause();
+                        break;
                     case "0": running = false; Console.WriteLine("Роботу програми завершено. До побачення!"); break;
                     default: Console.WriteLine("Помилка: такого пункту меню не існує. Спробуйте ще раз."); Pause(); break;
                 }
@@ -48,6 +65,7 @@ namespace CarShowroom_Okogrib
             Console.WriteLine("3. Зведена таблиця наявності та продажу машин");
             Console.WriteLine("4. Додати ціну автомобіля до бази");
             Console.WriteLine("5. Показати список цін автомобілів");
+            Console.WriteLine("6. Показати статистику та найдорожче авто");
             Console.WriteLine("0. Вихід");
             Console.Write("Оберіть пункт меню: ");
         }
@@ -79,6 +97,36 @@ namespace CarShowroom_Okogrib
             {
                 Console.WriteLine($"{i + 1,5} | {values[i],15:F2}");
             }
+        }
+        static void FindMaxPrice(double[] values, int count, out double maxValue, out int maxNumber)
+        {
+            if (count <= 0)
+            {
+                maxValue = 0;
+                maxNumber = 0;
+                return;
+            }
+
+            maxValue = values[0];
+            maxNumber = 1;
+
+            for (int i = 1; i < count; i++)
+            {
+                if (values[i] > maxValue)
+                {
+                    maxValue = values[i];
+                    maxNumber = i + 1;
+                }
+            }
+        }
+        static void CalculateStatistics(double[] values, int count, out double sum, out double average)
+        {
+            sum = 0;
+            for (int i = 0; i < count; i++)
+            {
+                sum += values[i];
+            }
+            average = count > 0 ? sum / count : 0;
         }
 
         static void ShowAbout()
