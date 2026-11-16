@@ -30,6 +30,10 @@ namespace CarShowroom_Okogrib
                         Console.WriteLine($"Поточна кількість записів у базі: {count}");
                         Pause();
                         break;
+                    case "5":
+                        PrintPricesTable(carPrices, count);
+                        Pause();
+                        break;
                     case "0": running = false; Console.WriteLine("Роботу програми завершено. До побачення!"); break;
                     default: Console.WriteLine("Помилка: такого пункту меню не існує. Спробуйте ще раз."); Pause(); break;
                 }
@@ -43,9 +47,11 @@ namespace CarShowroom_Okogrib
             Console.WriteLine("2. Таблиця вартості авто залежно від пробігу");
             Console.WriteLine("3. Зведена таблиця наявності та продажу машин");
             Console.WriteLine("4. Додати ціну автомобіля до бази");
+            Console.WriteLine("5. Показати список цін автомобілів");
             Console.WriteLine("0. Вихід");
             Console.Write("Оберіть пункт меню: ");
         }
+
         static void AddPrice(double[] values, ref int count, double newValue, int capacity)
         {
             if (count == capacity)
@@ -56,6 +62,23 @@ namespace CarShowroom_Okogrib
             values[count] = newValue;
             count++;
             Console.WriteLine("Ціну успішно додано.");
+        }
+        static void PrintPricesTable(double[] values, int count)
+        {
+            if (count == 0)
+            {
+                Console.WriteLine("База цін порожня. Немає даних для виведення.");
+                return;
+            }
+
+            Console.WriteLine("=== ПЕРЕЛІК ЦІН АВТОМОБІЛІВ ===");
+            Console.WriteLine($"{"№",5} | {"Ціна, тис.$",15}");
+            Console.WriteLine(new string('-', 23));
+
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine($"{i + 1,5} | {values[i],15:F2}");
+            }
         }
 
         static void ShowAbout()
