@@ -37,6 +37,19 @@ namespace CarShowroom_Okogrib
                     case "6":
                         if (count == 0)
                         {
+                            Console.WriteLine("База порожня. Немає елементів для видалення.");
+                        }
+                        else
+                        {
+                            PrintPricesTable(carPrices, count);
+                            int numberToRemove = ReadInt($"Введіть номер запису для видалення (від 1 до {count}): ", 1, count);
+                            RemoveAt(carPrices, ref count, numberToRemove - 1);
+                        }
+                        Pause();
+                        break;
+                    case "7":
+                        if (count == 0)
+                        {
                             Console.WriteLine("База порожня. Неможливо порахувати статистику.");
                         }
                         else
@@ -65,7 +78,8 @@ namespace CarShowroom_Okogrib
             Console.WriteLine("3. Зведена таблиця наявності та продажу машин");
             Console.WriteLine("4. Додати ціну автомобіля до бази");
             Console.WriteLine("5. Показати список цін автомобілів");
-            Console.WriteLine("6. Показати статистику та найдорожче авто");
+            Console.WriteLine("6. Видалити ціну за номером");
+            Console.WriteLine("7. Показати статистику та найдорожче авто");
             Console.WriteLine("0. Вихід");
             Console.Write("Оберіть пункт меню: ");
         }
@@ -81,6 +95,25 @@ namespace CarShowroom_Okogrib
             count++;
             Console.WriteLine("Ціну успішно додано.");
         }
+
+        static void RemoveAt(double[] values, ref int count, int index)
+        {
+            if (index < 0 || index >= count)
+            {
+                Console.WriteLine("Помилка: неправильний номер елемента. Змін не виконано.");
+                return;
+            }
+
+            for (int i = index; i < count - 1; i++)
+            {
+                values[i] = values[i + 1];
+            }
+
+            values[count - 1] = 0;
+            count--;
+            Console.WriteLine($"Запис №{index + 1} успішно видалено.");
+        }
+
         static void PrintPricesTable(double[] values, int count)
         {
             if (count == 0)
@@ -89,7 +122,7 @@ namespace CarShowroom_Okogrib
                 return;
             }
 
-            Console.WriteLine("=== ПЕРЕЛІК ЦІН АВТОМОБІЛІВ ===");
+            Console.WriteLine("ПЕРЕЛІК ЦІН АВТОМОБІЛІВ");
             Console.WriteLine($"{"№",5} | {"Ціна, тис.$",15}");
             Console.WriteLine(new string('-', 23));
 
@@ -98,6 +131,7 @@ namespace CarShowroom_Okogrib
                 Console.WriteLine($"{i + 1,5} | {values[i],15:F2}");
             }
         }
+
         static void FindMaxPrice(double[] values, int count, out double maxValue, out int maxNumber)
         {
             if (count <= 0)
@@ -119,6 +153,7 @@ namespace CarShowroom_Okogrib
                 }
             }
         }
+
         static void CalculateStatistics(double[] values, int count, out double sum, out double average)
         {
             sum = 0;
